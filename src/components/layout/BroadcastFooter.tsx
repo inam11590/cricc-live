@@ -99,6 +99,15 @@ export function BroadcastFooter() {
               </li>
               <li>
                 <Link
+                  href="/hub"
+                  className="tv-focusable flex items-center space-x-2 text-slate-300 hover:text-emerald-400 transition-colors"
+                >
+                  <Radio className="h-3.5 w-3.5 text-emerald-400" />
+                  <span>Cricket Hub (Scores & Stats API)</span>
+                </Link>
+              </li>
+              <li>
+                <Link
                   href="/setup/android"
                   className="tv-focusable flex items-center space-x-2 text-slate-300 hover:text-white transition-colors"
                 >

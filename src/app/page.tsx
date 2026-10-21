@@ -53,6 +53,14 @@ export default function HomePage() {
           </p>
 
           <div className="flex flex-wrap items-center gap-3 pt-2">
+            <Link
+              href="/hub"
+              className="tv-focusable flex items-center space-x-2 rounded-xl bg-emerald-500/20 border border-emerald-500/40 px-3.5 py-1.5 text-xs font-bold text-emerald-400 hover:bg-emerald-500 hover:text-black transition-all"
+            >
+              <Radio className="h-4 w-4" />
+              <span>Explore Cricket Hub (Live Scores & Stats)</span>
+              <ArrowRight className="h-3.5 w-3.5" />
+            </Link>
             <div className="flex items-center space-x-2 rounded-xl bg-white/5 border border-white/10 px-3.5 py-1.5 text-xs text-slate-300">
               <Cpu className="h-4 w-4 text-emerald-400" />
               <span>Next.js 16 (App Router)</span>

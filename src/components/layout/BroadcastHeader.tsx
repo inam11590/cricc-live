@@ -3,7 +3,7 @@
 import React, { useState, useEffect, useSyncExternalStore } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Tv, Smartphone, Apple, Search, Menu, X, Radio } from 'lucide-react';
+import { Tv, Smartphone, Apple, Search, Menu, X, Radio, BarChart3 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { ChannelJumpModal } from './ChannelJumpModal';
 
@@ -48,6 +48,13 @@ export function BroadcastHeader() {
       icon: Radio,
       badge: '6 ON AIR',
       isActive: pathname === '/' || pathname.startsWith('/live'),
+    },
+    {
+      label: 'Cricket Hub',
+      href: '/hub',
+      icon: BarChart3,
+      badge: 'LIVE API',
+      isActive: pathname === '/hub',
     },
     {
       label: 'Android',
