@@ -25,14 +25,19 @@ const TimezoneContext = createContext<TimezoneContextType | undefined>(undefined
 
 const LOCAL_STORAGE_KEY = 'livecric_timezone_mode';
 
-// Clock subscription store
+// Clock subscription store with stable snapshot reference
+let currentClockTime = typeof window !== 'undefined' ? Date.now() : 0;
+
 function subscribeClock(onStoreChange: () => void) {
-  const timer = setInterval(onStoreChange, 1000);
+  const timer = setInterval(() => {
+    currentClockTime = Date.now();
+    onStoreChange();
+  }, 1000);
   return () => clearInterval(timer);
 }
 
 function getClockSnapshot(): number {
-  return Date.now();
+  return currentClockTime;
 }
 
 function getClockServerSnapshot(): number {

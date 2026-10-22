@@ -2,9 +2,10 @@ import type { Metadata, Viewport } from 'next';
 import { Outfit, Inter, JetBrains_Mono } from 'next/font/google';
 import '@/styles/globals.css';
 import { TimezoneProvider } from '@/context/TimezoneContext';
+import { cricketService } from '@/services/cricketService';
 import { LiveTickerBar } from '@/components/layout/LiveTickerBar';
-import { BroadcastHeader } from '@/components/layout/BroadcastHeader';
-import { BroadcastFooter } from '@/components/layout/BroadcastFooter';
+import { Header } from '@/components/layout/Header';
+import { Footer } from '@/components/layout/Footer';
 
 const outfit = Outfit({
   subsets: ['latin'],
@@ -28,20 +29,21 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'Livecric — Browser-Native Live Cricket Streaming Matrix',
+  title: 'CricLive — Professional Cricket Live Scores, Match Center & Analytics',
   description:
-    'Ultra-low-latency live cricket streaming directly in your browser. Curated 6-channel monthly broadcast matrix for desktop, mobile PWA, and Smart TVs with zero friction.',
-  applicationName: 'Livecric',
+    'Real-time cricket live scores, ball-by-ball commentary, tournament schedules, recent results, and official ICC rankings. Clean, dark-mode high performance sports data platform.',
+  applicationName: 'CricLive',
   keywords: [
-    'cricket live stream',
-    'live cricket streaming',
-    'browser cricket streaming',
-    'smart tv cricket',
-    'webcric live',
-    'world test championship live',
-    'wbbl live stream',
+    'cricket live score',
+    'cricket match center',
+    'live cricket scorecard',
+    'ICC Champions Trophy 2026',
+    'World Test Championship',
+    'IPL 2026 schedule',
+    'ICC cricket rankings',
+    'CricLive',
   ],
-  authors: [{ name: 'Livecric Broadcast Network' }],
+  authors: [{ name: 'CricLive Data & Analytics' }],
 };
 
 export const viewport: Viewport = {
@@ -51,11 +53,13 @@ export const viewport: Viewport = {
   maximumScale: 5,
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const liveMatches = await cricketService.getLiveMatches();
+
   return (
     <html
       lang="en"
@@ -63,15 +67,15 @@ export default function RootLayout({
     >
       <body className="min-h-screen bg-[#05080F] font-sans text-slate-100 antialiased selection:bg-emerald-500 selection:text-black">
         <TimezoneProvider>
-          {/* Atmospheric Floodlight Background Glow */}
+          {/* Atmospheric Stadium Floodlight Glow */}
           <div className="pointer-events-none fixed inset-0 z-0 stadium-glow opacity-80" />
 
-          {/* Broadcast App Shell */}
+          {/* App Shell */}
           <div className="relative z-10 flex min-h-screen flex-col">
-            <LiveTickerBar />
-            <BroadcastHeader />
+            <LiveTickerBar initialMatches={liveMatches} />
+            <Header />
             <main className="flex-1">{children}</main>
-            <BroadcastFooter />
+            <Footer />
           </div>
         </TimezoneProvider>
       </body>
